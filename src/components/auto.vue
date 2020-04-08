@@ -320,7 +320,7 @@ export default {
   -moz-box-shadow: 0px 0px 3px #333333;
   -webkit-box-shadow: 0px 0px 3px #333333;
   box-shadow: 0px 0px 3px #333333;
-  background-color: #996666;
+  background-color: #26a6e3bf
 }
 .cells {
   background-color: #fff;
