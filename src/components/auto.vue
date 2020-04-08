@@ -1,7 +1,9 @@
 <template>
   <div class="box">
-    <button @click="shuffle">重置</button>
-    <button @click="aotoPlay">自动</button>
+    <div class="button">
+      <button @click="shuffle" class="replay">重置</button>
+      <button @click="aotoPlay" class="autoplay">自动</button>
+    </div>
     <transition-group name="cell" tag="div" class="container">
       <div
         @click.prevent="clickBlock(index)"
@@ -297,8 +299,10 @@ export default {
 
 <style>
 .box {
-  width: 400px;
+  position: absolute;
+  width: 30rem;
   margin: 60px auto 0;
+  right: 2rem;
 }
 
 .container {
@@ -320,7 +324,7 @@ export default {
   -moz-box-shadow: 0px 0px 3px #333333;
   -webkit-box-shadow: 0px 0px 3px #333333;
   box-shadow: 0px 0px 3px #333333;
-  background-color: #26a6e3bf
+  background-color: #26a6e3bf;
 }
 .cells {
   background-color: #fff;
@@ -331,5 +335,18 @@ export default {
 }
 .cell-move {
   transition: transform 0.5s;
+}
+.replay,
+.autoplay {
+  width: 100px;
+  height: 50px;
+  color: #333333;
+  background-color: wheat;
+  font-size: 1.2rem;
+  outline: none;
+  margin-right: 10px;
+}
+.button{
+  margin-right: 100px;
 }
 </style>
