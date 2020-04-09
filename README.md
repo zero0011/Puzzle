@@ -10,6 +10,7 @@ npm run dev
 
 1. **普通的拼图功能**
 2. **自动拼图功能(难点)**
+3. **游戏聊天室的设计**
 
 ## 效果大概是下面这样的
 (效果)[https://zero0011.github.io/puzzle_look/]
@@ -177,6 +178,7 @@ pass() {
 ```
 
 ## 自动拼图功能
+
     本部分是这个项目的难点 , 讲的是实现自动拼图功能
 
 ### 原理
@@ -267,3 +269,45 @@ function Reverse_order_number(nums) {
 3. 为什么选择二维数组？因为对于0的移动限定是有一定空间边界的，比如0如果在第二行的最右边，那么0只能进行左上下三种移动方式。通过二维数组的两种下标可以很方便的来判断下一个状态的可选方向
 4. 将每种状态转化为二维数组后，就可以配合广搜来进行遍历。初始状态可以设定为广搜中图的第一层，由初始状态通过判断0的移动方向可以得到不大于4中状态的子节点，同时需要维护一个对象来记录每个子节点的父节点是谁以此来反推出动画的运动轨迹及一个对象来负责判断当前子节点先前是否已出现过，出现过则无需再压入队。至此反复求出节点的子节点并无重复的压入队
 5. 在遍历状态的过程中，可以将二维数组转化为数字或字符串，如123456780。在变为一维数组后便可以直接判断该状态是否等于最终状态，因为从数组变为了字符串或数字的基本类型就可以直接比较是否相等。如果相等那么从该节点一步步反推父节点至起始节点，得到动画路径
+
+## 游戏聊天室
+
+### 思路
+- 由于是聊天室, 必须实现双向书记传递
+  传统的 http 请求模拟双向数据传递的方式是 http + polling(轮询)
+  但这种方式不仅浪费带宽资源 , 而且占用 CPU内存
+- 这时,我们采用 webSocket方式, 它的最大特点是服务器可以主动向客户端推送消息,客户端也可以主动向服务器发送消息,是真正的双向的平等对话,属于服务器推送技术
+
+### websocket 如何建立连接
+简单来说 , 客户端通过 http 请求与 websocket 服务端协商升级协议。协议升级完成后 , 后续的数据交互则遵循 websocket协议
+
+1. 客户端 : 申请协议升级
+首先 , 客户端发起协议升级请求 。可以看到 , 采用的是标准的HTTP报文格式，且只支持GET方法。
+
+**重点请求首部**
+- Connection : Upgrade : 表示要升级协议
+- Upgrade : websocket : 表示要升级到 websocket协议
+- Sec-WebSocket-Key : 与后面服务端响应首部的Sec-WebSocket-Accept是配套的，提供基本的防护，比如恶意的连接，或者无意的连接。
+
+2. 服务端：响应协议升级
+服务端返回内容如下 : 状态代码 101 表示协议切换。
+
+```html
+HTTP/1.1 101 Switching Protocols
+Connection:Upgrade
+Upgrade: websocket
+Sec-WebSocket-Accept: Oy4NRAQ13jhfONC7bP8dTKb4PTU=
+```
+
+3. Sec-WebSocket-Accept的计算
+Sec-WebSocket-Accept 根据客户端请求首部的 Sec-WebSocket-key计算出来的
+
+计算公式:
+- 将Sec-WebSocket-Key跟258EAFA5-E914-47DA-95CA-C5AB0DC85B11拼接。
+- 通过SHA1计算出摘要，并转成base64字符串。
+
+### 安装 
+- 服务端  npm install --save socket.io
+- 客户端 npm install --save socket.io-client
+### socket.io
+  Socket.io不是Websocket，它只是将Websocket和轮询 （Polling）机制以及其它的实时通信方式封装成了通用的接口，并且在服务端实现了这些实时机制的相应代码。也就是说，Websocket仅仅是 Socket.io实现实时通信的一个子集。因此Websocket客户端连接不上Socket.io服务端，当然Socket.io客户端也连接不上Websocket服务端。
