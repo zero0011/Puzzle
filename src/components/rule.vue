@@ -31,7 +31,7 @@ export default {
 .rule {
     position: absolute;
     left: 26rem;
-    top:  9rem;
+    top: 4rem;
 }
 .rule_ul{
     list-style: none;

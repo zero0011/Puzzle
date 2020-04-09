@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "loadsh": "^0.0.4",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

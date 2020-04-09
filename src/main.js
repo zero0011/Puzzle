@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 import _ from 'loadsh'
+import './assets/css/chat.css'
+
 
 Vue.config.productionTip = false
 Vue.prototype._ = _

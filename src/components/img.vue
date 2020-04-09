@@ -16,7 +16,7 @@ export default {
 .img {
     position: absolute;
     left: 50px;
-    top: 146px;
+    top: 65px;
     width: 370px;
     height: 350px;
 }

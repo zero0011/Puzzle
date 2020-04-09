@@ -303,6 +303,7 @@ export default {
   width: 30rem;
   margin: 60px auto 0;
   right: 2rem;
+  top: -2rem;
 }
 
 .container {
