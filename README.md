@@ -3,11 +3,13 @@
 ## 启动
 
 1. 前端
+
  npm i
 
  npm run dev
 
 2. 后端
+
 cd server
 
 npm i 
