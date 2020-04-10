@@ -31,7 +31,7 @@
                 <span class="message fr">{{item.message}}</span>
               </div>
               <div class="chat-item item-left clearfix rela" v-else>
-                <span class="abs uname">{{item.username}} ({{item.msgDate | formatData }})</span>
+                <span class="abs uname">{{item.username}} ({{item.msgDate | formatDate }})</span>
                 <span class="fl message">{{item.message}}</span>
               </div>
             </div>
