@@ -4,11 +4,14 @@
 
 1. 前端
  npm i
+
  npm run dev
 
 2. 后端
 cd server
+
 npm i 
+
 nodemon app.js
 
 ## 实现功能有
