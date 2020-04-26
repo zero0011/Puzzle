@@ -141,6 +141,19 @@ shuffle() {
 
 其中`_.shuffle`是`lodash`的打乱数组函数
 
+**手写洗牌算法**
+
+```js
+function shuffle(arr) {
+  let len = arr.length;
+  while(len) {
+    let index = Math.floor(Math.random() * len--);
+    [arr[index] , arr[len]] = [arr[len] , arr[index]];
+  }
+  return arr;
+}
+```
+
 ### 点击移动
  就是当点击某个块的时候获取点击快上下左右的值
  如果空白块在点击快的左边，并且点击快不是此列的第一个，则点击块往左侧和空白块交换位置，其实是交换值
